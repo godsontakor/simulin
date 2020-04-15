@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.btn-menu {
+  display: grid;
+  width: 200px;
+  height: 200px;
+  margin-top: 30px;
+
+  grid-gap: 4rem;
+  padding-left: 1rem;
+}
+img {
+  padding-left: 50px;
+}
