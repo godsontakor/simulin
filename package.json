@@ -1,0 +1,27 @@
+{
+  "name": "simulin",
+  "version": "1.0.0",
+  "description": "solids control sim",
+  "main": "./src/index.js",
+  "scripts": {
+    "dev": "webpack",
+    "start": "electron ."
+  },
+  "author": "takor godson",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.1.0",
+    "babel-preset-env": "^1.7.0",
+    "electron": "^8.0.1",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  },
+  "dependencies": {
+    "@tensorflow/tfjs": "^1.7.2",
+    "chart.js": "^2.9.3",
+    "math.js": "^1.1.46",
+    "three": "^0.114.0"
+  }
+}
