@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unweighted Mud</title>
+  </head>
+  <body>
+    <style>
+      body {
+        box-sizing: border-box;
+      }
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        /* position: absolute; */
+      }
+      body,
+      input {
+        font: menu;
+      }
+
+      textarea,
+      input,
+      div,
+      button {
+        outline: none;
+        margin: 0;
+      }
+
+      .controls {
+        background-color: rgb(217, 241, 238);
+        padding: 10px 10px 10px 10px;
+        margin-bottom: 20px;
+      }
+      button {
+        font-size: 14px;
+        background-color: rgb(181, 220, 216);
+        border: none;
+        padding: 0.5em 1em;
+      }
+      button:hover {
+        background-color: rgb(156, 198, 192);
+      }
+      button:active {
+        background-color: rgb(144, 182, 177);
+      }
+
+      input {
+        display: flex;
+        padding: 2 0;
+        margin-left: 100px;
+      }
+      label {
+        position: absolute;
+        display: block;
+        margin-left: 10px;
+      }
+      .tabcontent {
+        display: none;
+      }
+
+      .btn-cal {
+        margin-top: 10px;
+        margin-left: 100px;
+      }
+      p {
+        margin-left: 100px;
+      }
+      .ejected-slurry,
+      .ejected-water {
+        display: flex;
+        margin-top: 20px;
+        margin-left: 100px;
+        text-align: center;
+      }
+    </style>
+
+    <section class="controls">
+      <button class="tablink" onclick="openPage('Hydrocyclone', this, 'green')">
+        Hydroclone Analysis
+      </button>
+      <button
+        id="defaultOpen"
+        class="tablink"
+        onclick="openPage('Ejection', this, 'green')"
+      >
+        Ejection Calculation
+      </button>
+
+      <button
+        class="tablink"
+        onclick="openPage('Dilution based', this, 'green')"
+      >
+        Dilution based on Vol driled
+      </button>
+    </section>
+
+    <!-- HYDROCYCLONE ANALYSIS -->
+    <div class="tabcontent" id="Hydrocyclone">
+      <label for="density of slurry">P(lbm/gal)</label>
+      <input
+        type="number"
+        id="density-slurry"
+        placeholder="density of slurry"
+      />
+      <br />
+      <!-- <label for="mass-water">mw</label>
+      <input
+        type="number"
+        id="mass-water"
+        placeholder="mass of water in mud"
+      /><br /> -->
+
+      <!-- <label for="vol-water">Vw</label>
+      <input
+        type="number"
+        id="vol-water"
+        placeholder="volume of water in mud"
+      />
+      <br /> -->
+      <label for="density-solids">P<sub>s</sub>(lbm/gal) </label>
+      <input
+        type="number"
+        id="density-solids"
+        placeholder="Density of drilled solids"
+      />
+      <br />
+      <label for="water-density">P<sub>w</sub> (lbm/gal)</label>
+      <input type="number" id="water-density" placeholder="density of water" />
+      <br />
+
+      <label for="vol-frac-water">f<sub>w</sub> </label>
+      <input
+        type="number"
+        id="vol-frac-water"
+        placeholder="volume-fraction of water"
+      />
+      <button onclick="mudDensity()" class="btn-cal">Vol frac 0f solids</button>
+      <p>
+        Volume fraction of solids is: <br />
+        <span id="result"></span>
+      </p>
+    </div>
+
+    <!-- Ejection -->
+    <div class="tabcontent" id="Ejection">
+      <label for="density-solids">P<sub>s</sub>(lbm/gal)</label>
+      <input
+        type="number"
+        id="density-solids"
+        placeholder="Density of drilled solids"
+      />
+      <br />
+      <label for="water-density">fs</label>
+      <input type="number" id="vol-frac-solid" placeholder="vol-frac-solid" />
+      <br />
+
+      <label for="vol-frac-fluid">fbf</label>
+      <input
+        type="number"
+        id="vol-frac-fluid"
+        placeholder="vol-fraction of base fluid"
+      />
+
+      <button onclick="ejectedSlurry()" class="ejected-slurry">
+        Calculate mass of ejected slurry
+      </button>
+      <button onclick="ejectedWater()" class="ejected-water">
+        Cal Vol fraction of ejected water
+      </button>
+
+      <p>
+        mass of slurry ejected is: <br />
+        <span id="mse"></span>
+      </p>
+      <p>
+        Volume fraction of solids is: <br />
+        <span id="Vwe"></span>
+      </p>
+    </div>
+
+    <!-- Dilution based on drilled Volume -->
+    <div class="tabcontent" id="Dilution based">
+      <label for="density-solids">ps</label>
+      <input
+        type="number"
+        id="density-solids"
+        placeholder="Density of drilled solids"
+      />
+      <br />
+      <label for="water-density">fs</label>
+      <input type="number" id="vol-frac-solid" placeholder="vol-frac-solid" />
+      <br />
+
+      <label for="vol-frac-fluid">fbf</label>
+      <input
+        type="number"
+        id="vol-frac-fluid"
+        placeholder="vol-fraction of base fluid"
+      />
+
+      <button onclick="ejectedSlurry()" class="ejected-slurry">
+        Calculate mass of ejected slurry
+      </button>
+      <button onclick="ejectedWater()" class="ejected-water">
+        Cal Vol fraction of ejected water
+      </button>
+
+      <p>
+        mass of slurry ejected is: <br />
+        <span id="mse"></span>
+      </p>
+      <p>
+        Volume fraction of solids is: <br />
+        <span id="Vwe"></span>
+      </p>
+    </div>
+    <script src="unweighted.js"></script>
+  </body>
+</html>

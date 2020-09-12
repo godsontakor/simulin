@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dilution</title>
+  </head>
+  <body>
+    <div id="tester" style="width: 800px; height: 600px;"></div>
+    <script src="plotly-latest.min.js"></script>
+    <script>
+      TESTER = document.getElementById("tester");
+      Plotly.newPlot(
+        TESTER,
+        [
+          {
+            x: [1, 2, 3, 4, 5],
+            y: [1, 2, 4, 8, 16],
+          },
+        ],
+        {
+          margin: { t: 0 },
+        }
+      );
+    </script>
+  </body>
+</html>
