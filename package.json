@@ -22,6 +22,6 @@
     "@tensorflow/tfjs": "^1.7.2",
     "chart.js": "^2.9.3",
     "math.js": "^1.1.46",
-    "three": "^0.114.0"
+    "three": "^0.125.0"
   }
 }
